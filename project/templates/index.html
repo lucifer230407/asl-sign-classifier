@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASL Sign Classifier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="logo">
+      <span class="logo-bracket">[</span>ASL<span class="logo-accent">.</span>AI<span class="logo-bracket">]</span>
+    </div>
+    <p class="tagline">Real-time American Sign Language Recognition</p>
+  </header>
+
+  <main>
+    <!-- Left: Video Feed -->
+    <section class="feed-panel">
+      <div class="feed-label">LIVE FEED</div>
+      <div class="video-wrapper">
+        <div class="scan-line"></div>
+        <img id="videoFeed" src="/video" alt="Live webcam feed"/>
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+      </div>
+      <div class="feed-status">
+        <span class="dot"></span> Camera Active
+      </div>
+    </section>
+
+    <!-- Right: Prediction Panel -->
+    <section class="prediction-panel">
+
+      <div class="pred-card main-pred">
+        <div class="pred-label">DETECTED SIGN</div>
+        <div class="pred-letter" id="predLetter">—</div>
+        <div class="pred-confidence" id="predConf">Confidence: —</div>
+        <div class="confidence-bar-bg">
+          <div class="confidence-bar-fill" id="confBar"></div>
+        </div>
+      </div>
+
+      <div class="pred-card top3-card">
+        <div class="pred-label">TOP 3 CANDIDATES</div>
+        <div id="top3List" class="top3-list">
+          <div class="top3-item placeholder">—</div>
+          <div class="top3-item placeholder">—</div>
+          <div class="top3-item placeholder">—</div>
+        </div>
+      </div>
+
+      <div class="pred-card alphabet-card">
+        <div class="pred-label">ASL ALPHABET</div>
+        <div class="alphabet-grid">
+          {% for c in classes %}
+          <div class="alpha-cell" id="alpha-{{ c }}">{{ c }}</div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <span>Built with OpenCV · TensorFlow · Flask</span>
+    <span>Sign MNIST · 24 Classes</span>
+  </footer>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>
